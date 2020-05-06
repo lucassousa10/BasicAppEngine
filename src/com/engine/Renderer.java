@@ -25,10 +25,20 @@ public class Renderer {
                         .getDataBuffer()).getData();
     }
 
+    /**
+     * Clears entire screen with the {@code clearColor} value.
+     */
     public void clear() {
         Arrays.fill(mainPixelData, clearColor);
     }
 
+    /**
+     * Defines the color of the pixel in the coordinates {@code x} and {@code y} of the the application screen with the color of {@code value}.
+     *
+     * @param x x coordinate of the pixel to set.
+     * @param y y coordinate of the pixel to set.
+     * @param value color of the desired pixel.
+     */
     private void setPixel(int x, int y, int value) {
         if ((x < 0 || x >= pixelWidth || y < 0 || y >= pixelHeight) || value == 0xffff00ff) {
             return;
@@ -37,15 +47,28 @@ public class Renderer {
         mainPixelData[x + y * pixelWidth] = value;
     }
 
-    public void drawText(String text, int offX, int offY, int color, Font font) {
+    /**
+     * Draws the specified text starting in {@code x} and {@code y} coordinates. The color of the text is set using the {@code color} param.
+     *
+     * Also, this method requires a font object (through the {@code font} param) to draw pixels properly.
+     *
+     * @see com.engine.gfx.Font
+     *
+     * @param text the text to be drawn, in a String object
+     * @param x x coordinate to start drawing the text
+     * @param y y coordinate to start drawing the text
+     * @param color the color of the text
+     * @param font the font the text should have.
+     */
+    public void drawText(String text, int x, int y, int color, Font font) {
         int offset = 0;
 
         for (int i = 0; i < text.length(); i++) {
             int unicode = text.codePointAt(i);
-            for (int y = 0; y < font.getFontImage().getHeight(); y++) {
-                for (int x = 0; x < font.getWidths()[unicode]; x++) {
-                    if (font.getFontImage().getImagePixelData()[(x + font.getOffsets()[unicode]) + y * font.getFontImage().getWidth()] == 0xffffffff) {
-                        setPixel(x + offX + offset, y + offY, color);
+            for (int yy = 0; yy < font.getFontImage().getHeight(); yy++) {
+                for (int xx = 0; xx < font.getWidths()[unicode]; xx++) {
+                    if (font.getFontImage().getImagePixelData()[(xx + font.getOffsets()[unicode]) + yy * font.getFontImage().getWidth()] == 0xffffffff) {
+                        setPixel(xx + x + offset, yy + y, color);
                     }
                 }
             }
@@ -53,8 +76,10 @@ public class Renderer {
         }
     }
 
+    @Deprecated
     Font2 font2 = new Font2();
 
+    @Deprecated
     public void drawText2(String text, int offX, int offY, float scale, int color) {
         scale = scale < 1 ? 1 : scale;
         int nextOffset = 0;
@@ -77,30 +102,39 @@ public class Renderer {
         drawRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height, color);
     }
 
-    public void drawRect(int offX, int offY, int width, int height, int color) {
-        if (offX < -width) return;
-        if (offY < -height) return;
-        if (offX >= pixelWidth) return;
-        if (offY >= pixelHeight) return;
+    /**
+     * Draws (not filling, only bordering) a rectangle polygon shape using the respective params.
+     *
+     * @param x x coordinate to start drawing the rectangle
+     * @param y y coordinate to start drawing the rectangle
+     * @param width width of the rectangle
+     * @param height height of the rectangle
+     * @param color color of edges/border of the rectangle
+     */
+    public void drawRect(int x, int y, int width, int height, int color) {
+        if (x < -width) return;
+        if (y < -height) return;
+        if (x >= pixelWidth) return;
+        if (y >= pixelHeight) return;
 
         int newX = 0;
         int newY = 0;
         int newWidth = width;
         int newHeight = height;
 
-        if (offX < 0) newX -= offX;
-        if (offY < 0) newY -= offY;
-        if (newWidth + offX >= pixelWidth) newWidth -= newWidth + offX - pixelWidth;
-        if (newHeight + offY >= pixelHeight) newHeight -= newHeight + offY - pixelHeight;
+        if (x < 0) newX -= x;
+        if (y < 0) newY -= y;
+        if (newWidth + x >= pixelWidth) newWidth -= newWidth + x - pixelWidth;
+        if (newHeight + y >= pixelHeight) newHeight -= newHeight + y - pixelHeight;
 
-        for (int x = newX; x < newWidth; x++) {
-            setPixel(x + offX, offY, color);
-            setPixel(x + offX, offY + height, color);
+        for (int xx = newX; xx < newWidth; xx++) {
+            setPixel(xx + x, y, color);
+            setPixel(xx + x, y + height, color);
         }
 
-        for (int y = newY; y < newHeight + 1; y++) {
-            setPixel(offX, y + offY, color);
-            setPixel(offX + width, y + offY, color);
+        for (int yy = newY; yy < newHeight + 1; yy++) {
+            setPixel(x, yy + y, color);
+            setPixel(x + width, yy + y, color);
         }
     }
 
@@ -225,9 +259,7 @@ public class Renderer {
     }
 
     //algorithm source: https://rosettacode.org/wiki/Bitmap/B%C3%A9zier_curves/Cubic#Kotlin
-    public void drawCubicCurve(Point... args) {
-        int resolution = 20;
-
+    public void drawCubicCurve(int resolution, Point... args) {
         //create points references
         Point[] points = new Point[resolution + 1];
         for (int i = 0; i < points.length; i++) {
@@ -251,13 +283,11 @@ public class Renderer {
         for (int i = 0; i < points.length - 1; i++) {
             Point a = points[i];
             Point b = points[i + 1];
-            drawLine(a.x, a.y, b.x, b.y, Color.WHITE.getRGB());
+            drawLine2(a.x, a.y, b.x, b.y, Color.WHITE.getRGB());
         }
     }
 
-    public void drawQuadraticCurve(Point... args) {
-        int resolution = 20;
-
+    public void drawQuadraticCurve(int resolution, Point... args) {
         //create points references
         Point[] points = new Point[resolution + 1];
         for (int i = 0; i < points.length; i++) {
@@ -280,7 +310,7 @@ public class Renderer {
         for (int i = 0; i < points.length - 1; i++) {
             Point a = points[i];
             Point b = points[i + 1];
-            drawLine(a.x, a.y, b.x, b.y, Color.WHITE.getRGB());
+            drawLine2(a.x, a.y, b.x, b.y, Color.WHITE.getRGB());
         }
     }
 

@@ -9,14 +9,17 @@ import com.engine.gfx.Font;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
+/**
+ * Basic button widget component with a basic click listener.
+ */
 public class Button extends ApplicationObject {
 
     private final TextFont textFont;
     private Style style;
     private Rectangle rect;
 
-    boolean hovering = false;
-    boolean clicking = false, clicked = false;
+    private boolean hovering = false;
+    private boolean clicking = false, clicked = false;
 
     private ClickListener clickListener;
 
@@ -87,6 +90,9 @@ public class Button extends ApplicationObject {
         this.rect = rect;
     }
 
+    /**
+     * Basic structure to style a button.
+     */
     public static class Style {
 
         private int rawBodyColor;
@@ -155,5 +161,12 @@ public class Button extends ApplicationObject {
         public void setFontSize(int fontSize) {
             this.fontSize = fontSize;
         }
+    }
+
+    /**
+     * Interface to intercept and carry implementations of events to be fired at click moment.
+     */
+    public interface ClickListener {
+        void onClick(ApplicationObject relatedObject);
     }
 }
