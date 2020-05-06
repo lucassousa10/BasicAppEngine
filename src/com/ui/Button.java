@@ -21,6 +21,8 @@ public class Button extends ApplicationObject {
     private ClickListener clickListener;
 
     public Button(String text) {
+        super();
+
         //std sizes
         this.rect = new Rectangle(0, 0, 80, 30);
 

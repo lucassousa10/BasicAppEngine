@@ -13,9 +13,12 @@ public class UIApplication extends AbstractApplication {
     private ArrayList<ApplicationObject> objects;
     private HashMap<String, ApplicationObject> objectsTagsMap;
 
+    private RelativeLayout layoutManager;
+
     public UIApplication() {
         objects = new ArrayList<>();
         objectsTagsMap = new HashMap<>();
+        layoutManager = new RelativeLayout(objectsTagsMap);
     }
 
     public void addObject(ApplicationObject obj) {
@@ -48,6 +51,8 @@ public class UIApplication extends AbstractApplication {
                 obj.update(engine, deltaTime);
             }
         }
+
+        layoutManager.doLayout();
     }
 
     @Override
