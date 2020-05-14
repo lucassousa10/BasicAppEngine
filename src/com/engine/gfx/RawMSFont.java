@@ -1,11 +1,13 @@
 package com.engine.gfx;
 
-public class Font2 {
+import com.engine.Renderer;
+
+public class RawMSFont {
 
     public static final int CHAR_WIDTH = 13;
     public static final int CHAR_HEIGHT = 6;
 
-    String ZERO =
+    public static final String ZERO =
             "   xxxxxxx   " +
                     "  xx     xx  " +
                     "  xx     xx  " +
@@ -13,7 +15,7 @@ public class Font2 {
                     "  xx     xx  " +
                     "   xxxxxxx   ";
 
-    String ONE =
+    public static final String ONE =
             "      xx     " +
                     "    xxxx     " +
                     "  xx  xx     " +
@@ -21,7 +23,7 @@ public class Font2 {
                     "      xx     " +
                     "  xxxxxxxxx  ";
 
-    String TWO =
+    public static final String TWO =
             "  xxxxxxxxx  " +
                     "         xx  " +
                     "         xx  " +
@@ -29,7 +31,7 @@ public class Font2 {
                     "  xx         " +
                     "  xxxxxxxxx  ";
 
-    String THREE =
+    public static final String THREE =
             "  xxxxxxxxx  " +
                     "         xx  " +
                     "     xxxxxx  " +
@@ -37,7 +39,7 @@ public class Font2 {
                     "         xx  " +
                     "  xxxxxxxxx  ";
 
-    String FOUR =
+    public static final String FOUR =
             "  xx     xx  " +
                     "  xx     xx  " +
                     "  xx     xx  " +
@@ -45,7 +47,7 @@ public class Font2 {
                     "         xx  " +
                     "         xx  ";
 
-    String FIVE =
+    public static final String FIVE =
             "  xxxxxxxxx  " +
                     "  xx         " +
                     "  xxxxxxxxx  " +
@@ -53,7 +55,7 @@ public class Font2 {
                     "         xx  " +
                     "  xxxxxxxxx  ";
 
-    String SIX =
+    public static final String SIX =
             "    xxxxxx   " +
                     "  xx         " +
                     "  xx         " +
@@ -61,7 +63,7 @@ public class Font2 {
                     "  xx      xx " +
                     "   xxxxxxx   ";
 
-    String SEVEN =
+    public static final String SEVEN =
             "  xxxxxxxxx  " +
                     "         xx  " +
                     "         xx  " +
@@ -69,7 +71,7 @@ public class Font2 {
                     "         xx  " +
                     "         xx  ";
 
-    String EIGHT =
+    public static final String EIGHT =
             "   xxxxxxx   " +
                     "  xx     xx  " +
                     "  xxxxxxxxx  " +
@@ -77,7 +79,7 @@ public class Font2 {
                     "  xx     xx  " +
                     "   xxxxxxx   ";
 
-    String NINE =
+    public static final String NINE =
             "  xxxxxxxxx  " +
                     "  xx     xx  " +
                     "  xxxxxxxxx  " +
@@ -85,7 +87,7 @@ public class Font2 {
                     "         xx  " +
                     "         xx  ";
 
-    String A =
+    public static final String A =
             "     xxx     " +
                     "   xx   xx   " +
                     " xx       xx " +
@@ -93,7 +95,7 @@ public class Font2 {
                     " xx       xx " +
                     " xx       xx ";
 
-    String B =
+    public static final String B =
             " xxxxxxxx    " +
                     " xx     xx   " +
                     " xxxxxxxxx   " +
@@ -101,7 +103,7 @@ public class Font2 {
                     " xx       xx " +
                     "  xxxxxxxx   ";
 
-    String C =
+    public static final String C =
             "  xxxxxxxx   " +
                     " xx      xx  " +
                     " x           " +
@@ -109,7 +111,7 @@ public class Font2 {
                     " xx      xx  " +
                     "  xxxxxxxx   ";
 
-    String D =
+    public static final String D =
             " xxxxxxxx    " +
                     " xx      xx  " +
                     " xx       xx " +
@@ -117,7 +119,7 @@ public class Font2 {
                     " xx      xx  " +
                     " xxxxxxxx    ";
 
-    String E =
+    public static final String E =
             " xxxxxxxxxxx " +
                     " xx          " +
                     " xxxxxxx     " +
@@ -125,7 +127,7 @@ public class Font2 {
                     " xx          " +
                     " xxxxxxxxxxx ";
 
-    String F =
+    public static final String F =
             " xxxxxxxxxxx " +
                     " xx          " +
                     " xxxxxxx     " +
@@ -134,7 +136,7 @@ public class Font2 {
                     " xx          ";
 
     //TODO: ficou feio
-    String G =
+    public static final String G =
             "  xxxxxxxx   " +
                     " xx      xxx " +
                     " xx          " +
@@ -142,7 +144,7 @@ public class Font2 {
                     " xx       xx " +
                     "   xxxxxxx   ";
 
-    String H =
+    public static final String H =
             " xx       xx " +
                     " xx       xx " +
                     " xxxxxxxxxxx " +
@@ -150,7 +152,7 @@ public class Font2 {
                     " xx       xx " +
                     " xx       xx ";
 
-    String I =
+    public static final String I =
             " xxxxxxxxxxx " +
                     "     xx      " +
                     "     xx      " +
@@ -158,7 +160,7 @@ public class Font2 {
                     "     xx      " +
                     " xxxxxxxxxxx ";
 
-    String J =
+    public static final String J =
             " xxxxxxxxxxx " +
                     "       xx    " +
                     "       xx    " +
@@ -166,7 +168,7 @@ public class Font2 {
                     " xx    xx    " +
                     "  xxxxxxx    ";
 
-    String K =
+    public static final String K =
             " xx     xx   " +
                     " xx   xx     " +
                     " xxxxxx      " +
@@ -174,7 +176,7 @@ public class Font2 {
                     " xx     xx   " +
                     " xx       xx ";
 
-    String L =
+    public static final String L =
             " xx          " +
                     " xx          " +
                     " xx          " +
@@ -182,7 +184,7 @@ public class Font2 {
                     " xx          " +
                     " xxxxxxxxxxx ";
 
-    String M =
+    public static final String M =
             " xx       xx " +
                     " xxx     xxx " +
                     " xx x   x xx " +
@@ -190,7 +192,7 @@ public class Font2 {
                     " xx   x   xx " +
                     " xx       xx ";
 
-    String N =
+    public static final String N =
             " xxxx     xx " +
                     " xx xx    xx " +
                     " xx  xx   xx " +
@@ -198,7 +200,7 @@ public class Font2 {
                     " xx    xx xx " +
                     " xx     xxxx ";
 
-    String O =
+    public static final String O =
             "    xxxxx    " +
                     "  xx     xx  " +
                     " xx       xx " +
@@ -206,7 +208,7 @@ public class Font2 {
                     "  xx     xx  " +
                     "    xxxxx    ";
 
-    String P =
+    public static final String P =
             " xxxxxxxxx   " +
                     " xx       xx " +
                     " xx       xx " +
@@ -214,7 +216,7 @@ public class Font2 {
                     " xx          " +
                     " xx          ";
 
-    String Q =
+    public static final String Q =
             "    xxxxx    " +
                     "  xx     xx  " +
                     " xx       xx " +
@@ -222,7 +224,7 @@ public class Font2 {
                     "  xx     xx  " +
                     "    xxxxx  x ";
 
-    String R =
+    public static final String R =
             " xxxxxxxxx   " +
                     " xx       xx " +
                     " xx       xx " +
@@ -230,7 +232,7 @@ public class Font2 {
                     " xx      xx  " +
                     " xx       xx ";
 
-    String S =
+    public static final String S =
             "  xxxxxxx    " +
                     " x           " +
                     "  xxxxxx     " +
@@ -238,7 +240,7 @@ public class Font2 {
                     "        xxx  " +
                     " xxxxxxxxx   ";
 
-    String T =
+    public static final String T =
             " xxxxxxxxxxx " +
                     "     xxx     " +
                     "     xxx     " +
@@ -246,7 +248,7 @@ public class Font2 {
                     "     xxx     " +
                     "     xxx     ";
 
-    String U =
+    public static final String U =
             " xx       xx " +
                     " xx       xx " +
                     " xx       xx " +
@@ -254,7 +256,7 @@ public class Font2 {
                     " xx       xx " +
                     "   xxxxxxx   ";
 
-    String V =
+    public static final String V =
             " xx       xx " +
                     "  xx     xx  " +
                     "   xx   xx   " +
@@ -262,7 +264,7 @@ public class Font2 {
                     "     xxx     " +
                     "      x      ";
 
-    String W =
+    public static final String W =
             " xx       xx " +
                     " xx       xx " +
                     " xx       xx " +
@@ -270,7 +272,7 @@ public class Font2 {
                     " xx  xxx  xx " +
                     "   xx   xx   ";
 
-    String X =
+    public static final String X =
             "  x       x  " +
                     "   xx   xx   " +
                     "     xxx     " +
@@ -278,7 +280,7 @@ public class Font2 {
                     "  xx     xx  " +
                     " x         x ";
 
-    String Y =
+    public static final String Y =
             " xx       xx " +
                     "  xx     xx  " +
                     "   xx   xx   " +
@@ -286,7 +288,7 @@ public class Font2 {
                     "     xxx     " +
                     "     xxx     ";
 
-    String Z =
+    public static final String Z =
             "   xxxxxxxxx " +
                     "        xxx  " +
                     "      xx     " +
@@ -294,7 +296,15 @@ public class Font2 {
                     "  xx         " +
                     " xxxxxxxxxxx ";
 
-    String EXCLAMATION_MARK =
+    public static final String SPACE =
+            "             " +
+                    "             " +
+                    "             " +
+                    "             " +
+                    "             " +
+                    "             ";
+
+    public static final String EXCLAMATION_MARK =
             "      xx     " +
                     "      xx     " +
                     "      xx     " +
@@ -302,7 +312,7 @@ public class Font2 {
                     "             " +
                     "      xx     ";
 
-    String DOT =
+    public static final String DOT =
             "             " +
                     "             " +
                     "             " +
@@ -310,54 +320,89 @@ public class Font2 {
                     " xx          " +
                     " xx          ";
 
-    private final String[] models;
+    public static final String COMMA =
+            "             " +
+                    "             " +
+                    "             " +
+                    "             " +
+                    "  xx         " +
+                    " xx          ";
 
-    public Font2() {
-        models = new String[(int) 'Z' + 1];
+    public static final String NULL =
+            "xxx      xxxx" +
+                    "xx xxxxxx xxx" +
+                    "xxxxxxxxx xxx" +
+                    "xxxxxx    xxx" +
+                    "xxxxxxxxxxxxx" +
+                    "xxxxxx  xxxxx";
 
-        models[(int) '!'] = EXCLAMATION_MARK;
-        models[(int) '.'] = DOT;
+    /**
+     * Create max possible character,
+     * but only desgns above will work.
+     * If user call some that is not
+     * designed, than NULL is choose.
+     */
+    private static final String[] MODELS = new String[0xff];
 
-        models[(int) '0'] = ZERO;
-        models[(int) '1'] = ONE;
-        models[(int) '2'] = TWO;
-        models[(int) '3'] = THREE;
-        models[(int) '4'] = FOUR;
-        models[(int) '5'] = FIVE;
-        models[(int) '6'] = SIX;
-        models[(int) '7'] = SEVEN;
-        models[(int) '8'] = EIGHT;
-        models[(int) '9'] = NINE;
+    static {
+        MODELS[' '] = SPACE;
+        MODELS['!'] = EXCLAMATION_MARK;
+        MODELS['.'] = DOT;
+        MODELS[','] = COMMA;
 
-        models[(int) 'A'] = A;
-        models[(int) 'B'] = B;
-        models[(int) 'C'] = C;
-        models[(int) 'D'] = D;
-        models[(int) 'E'] = E;
-        models[(int) 'F'] = F;
-        models[(int) 'G'] = G;
-        models[(int) 'H'] = H;
-        models[(int) 'I'] = I;
-        models[(int) 'J'] = J;
-        models[(int) 'K'] = K;
-        models[(int) 'L'] = L;
-        models[(int) 'M'] = M;
-        models[(int) 'N'] = N;
-        models[(int) 'O'] = O;
-        models[(int) 'P'] = P;
-        models[(int) 'Q'] = Q;
-        models[(int) 'R'] = R;
-        models[(int) 'S'] = S;
-        models[(int) 'T'] = T;
-        models[(int) 'U'] = U;
-        models[(int) 'V'] = V;
-        models[(int) 'W'] = W;
-        models[(int) 'X'] = X;
-        models[(int) 'Y'] = Y;
-        models[(int) 'Z'] = Z;
+        MODELS['0'] = ZERO;
+        MODELS['1'] = ONE;
+        MODELS['2'] = TWO;
+        MODELS['3'] = THREE;
+        MODELS['4'] = FOUR;
+        MODELS['5'] = FIVE;
+        MODELS['6'] = SIX;
+        MODELS['7'] = SEVEN;
+        MODELS['8'] = EIGHT;
+        MODELS['9'] = NINE;
+
+        MODELS['A'] = A;
+        MODELS['B'] = B;
+        MODELS['C'] = C;
+        MODELS['D'] = D;
+        MODELS['E'] = E;
+        MODELS['F'] = F;
+        MODELS['G'] = G;
+        MODELS['H'] = H;
+        MODELS['I'] = I;
+        MODELS['J'] = J;
+        MODELS['K'] = K;
+        MODELS['L'] = L;
+        MODELS['M'] = M;
+        MODELS['N'] = N;
+        MODELS['O'] = O;
+        MODELS['P'] = P;
+        MODELS['Q'] = Q;
+        MODELS['R'] = R;
+        MODELS['S'] = S;
+        MODELS['T'] = T;
+        MODELS['U'] = U;
+        MODELS['V'] = V;
+        MODELS['W'] = W;
+        MODELS['X'] = X;
+        MODELS['Y'] = Y;
+        MODELS['Z'] = Z;
     }
 
-    public String[] getModels() {
-        return models;
+    public static void renderChar(char c, int offX, int offY, float scale, int color, Renderer renderer) {
+        final char[] data = (MODELS[c] == null ? NULL : MODELS[c]).toCharArray();
+        final int roundScale = Math.round(scale);
+        for (int y = 0; y < CHAR_HEIGHT; y++) {
+            for (int x = 0; x < CHAR_WIDTH; x++) {
+                if (data[x + y * CHAR_WIDTH] != ' ') {
+                    renderer.fillRect(
+                            (x * roundScale) + offX,
+                            (y * roundScale) + offY,
+                            roundScale,
+                            roundScale,
+                            color);
+                }
+            }
+        }
     }
 }

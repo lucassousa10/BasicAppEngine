@@ -1,10 +1,11 @@
 package com.engine;
 
 import com.engine.gfx.Font;
-import com.engine.gfx.Font2;
+import com.engine.gfx.RawMSFont;
 import com.engine.gfx.Image;
 
 import java.awt.*;
+import java.awt.geom.Path2D;
 import java.awt.image.DataBufferInt;
 import java.util.Arrays;
 
@@ -13,7 +14,7 @@ public class Renderer {
 
     private int pixelWidth, pixelHeight;
     private int[] mainPixelData;
-    private int clearColor;
+    private int clearColor = Color.BLACK.getRGB();
 
     public Renderer(Engine e) {
         pixelWidth = e.getWidth();
@@ -39,12 +40,22 @@ public class Renderer {
      * @param y y coordinate of the pixel to set.
      * @param value color of the desired pixel.
      */
-    private void setPixel(int x, int y, int value) {
+    public boolean setPixel(int x, int y, int value) {
         if ((x < 0 || x >= pixelWidth || y < 0 || y >= pixelHeight) || value == 0xffff00ff) {
-            return;
+            return false;
         }
 
         mainPixelData[x + y * pixelWidth] = value;
+        return true;
+    }
+
+
+    public int getPixel(int x, int y) {
+        if ((x < 0 || x >= pixelWidth) || (y < 0 || y >= pixelHeight)) {
+            return -1;
+        }
+
+        return mainPixelData[x + y * pixelWidth];
     }
 
     /**
@@ -76,30 +87,32 @@ public class Renderer {
         }
     }
 
-    @Deprecated
-    Font2 font2 = new Font2();
-
-    @Deprecated
-    public void drawText2(String text, int offX, int offY, float scale, int color) {
-        scale = scale < 1 ? 1 : scale;
-        int nextOffset = 0;
+    //TODO: line breaking...
+    public void drawText(String text, int offX, int offY, float scale, int color) {
+        int nextCharacterOffsetX = 0;
         for (char c : text.toUpperCase().toCharArray()) {
-            if (c != ' ') {
-                char[] characterData = font2.getModels()[c].toCharArray();
-                for (int y = 0; y < Font2.CHAR_HEIGHT; y++) {
-                    for (int x = 0; x < Font2.CHAR_WIDTH; x++) {
-                        if (characterData[x + y * Font2.CHAR_WIDTH] != ' ') {
-                            fillRect(x + offX + nextOffset, y + offY, (int) scale, (int) scale, color);
-                        }
-                    }
-                }
-            }
-            nextOffset += Font2.CHAR_WIDTH;
+            RawMSFont.renderChar(c, nextCharacterOffsetX + offX, offY, scale, color, this);
+            nextCharacterOffsetX += RawMSFont.CHAR_WIDTH * scale;
         }
     }
 
-    public void drawRect(Rectangle rectangle, int color) {
-        drawRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height, color);
+    //todo
+    public void floodFillRect(int x, int y, int w, int h, int color){
+        int prevColor = getPixel(x, y);
+        drawRect(x, y, w, h, color);
+        ffRect(x + 1, y + 1, prevColor, color);
+    }
+
+    //todo
+    private void ffRect(int x, int y, int prevColor, int nextColor) {
+        if (getPixel(x, y) != prevColor || !setPixel(x, y, nextColor)) {
+            return;
+        }
+
+        ffRect(x + 1, y, prevColor, nextColor);
+        ffRect(x - 1, y, prevColor, nextColor);
+        ffRect(x, y + 1, prevColor, nextColor);
+        ffRect(x, y - 1, prevColor, nextColor);
     }
 
     /**
@@ -256,6 +269,10 @@ public class Renderer {
                 setPixel(x + offX, y + offY, image.getImagePixelData()[x + y * image.getWidth()]);
             }
         }
+    }
+
+    public void drawPath(Path2D.Double path){
+
     }
 
     //algorithm source: https://rosettacode.org/wiki/Bitmap/B%C3%A9zier_curves/Cubic#Kotlin
