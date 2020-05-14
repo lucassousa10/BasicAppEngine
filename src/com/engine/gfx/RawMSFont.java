@@ -2,9 +2,42 @@ package com.engine.gfx;
 
 import com.engine.Renderer;
 
+/**
+ * This is a very very very BASIC font class.
+ *
+ * Here is not used any kind of font file or
+ * even bytes. Instead, the rendering follows
+ * the various patters in constants bellow.
+ *
+ * This not seems to bad in performance terms,
+ * however, still a bit ugly font.
+ *
+ * As all string-designs are based in a simple
+ * "2D character matrix" then this will act
+ * like a pixeled font. Also, as all the designs
+ * has the same dimensions, this will generate a
+ * Monospaced font.
+ *
+ * Also, this have a very very >>VERY<< basic float
+ * scaling system.
+ *
+ * Future plans:
+ * - pass String designs to another strategy;
+ * - Strategy could use a big bytes data array;
+ * - each byte offset of that byte can be a value saying
+ *   that we have or no to plot a rect;
+ * - to get those bytes, a tool can be created to
+ *   help generate the values.
+ *
+ *  TODO: letter lower cases
+ *  TODO: more symbols
+ *
+ * @author Lucas Sousa
+ */
 public class RawMSFont {
 
     public static final int CHAR_WIDTH = 13;
+    //todo: increase
     public static final int CHAR_HEIGHT = 6;
 
     public static final String ZERO =
@@ -338,9 +371,18 @@ public class RawMSFont {
 
     /**
      * Create max possible character,
-     * but only desgns above will work.
-     * If user call some that is not
-     * designed, than NULL is choose.
+     * but only designs above will work.
+     * If user call one that is not
+     * defined, than NULL is choose.
+     *
+     * Note: must be know that models
+     * are used only to mark if a renderer
+     * should or no plot something in
+     * that coordinate. Because this,
+     * any kind of structure that can holds
+     * on value of two can be used. Here
+     * String was best because allows a
+     * better typing design.
      */
     private static final String[] MODELS = new String[0xff];
 
@@ -389,9 +431,28 @@ public class RawMSFont {
         MODELS['Z'] = Z;
     }
 
+    /**
+     * This render only ONE char onto screen.
+     *
+     * This takes a my custom renderer to "plot" rectangles
+     * at current coordinates offset and, for this reason,
+     * any kind of renderer that offer a "fillRect(x, y, w, h, color)"
+     * method can be used.
+     *
+     * @param c the targeted character that should be rendered
+     * @param offX the "what x coordinate" this character should be start rendered
+     * @param offY the "what y coordinate" this character should be start rendered
+     * @param scale the scale to increase/decrease the final result
+     * @param color the color to be used in rendering
+     * @param renderer a renderer to plot "squares" in each not empty point.
+     */
     public static void renderChar(char c, int offX, int offY, float scale, int color, Renderer renderer) {
         final char[] data = (MODELS[c] == null ? NULL : MODELS[c]).toCharArray();
+        //avoids huge casting inside loop
         final int roundScale = Math.round(scale);
+
+        //independent of scale, always will perform
+        //(CHAR_WIDTH * CHAR_HEIGHT) iterations
         for (int y = 0; y < CHAR_HEIGHT; y++) {
             for (int x = 0; x < CHAR_WIDTH; x++) {
                 if (data[x + y * CHAR_WIDTH] != ' ') {
