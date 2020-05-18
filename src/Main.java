@@ -1,35 +1,33 @@
 import com.engine.AbstractApplication;
 import com.engine.Engine;
 import com.engine.Renderer;
+import com.engine.ui.Button;
 
 import java.awt.*;
 
-import static com.engine.util.ExecutionTimeChecker.check;
-
 public class Main extends AbstractApplication {
 
-    float scale = 1;
-    float timeBuffer = 0;
+    Button button;
+
+    public Main() {
+        button = new Button("teste");
+        button.rect.x = 100;
+        button.rect.y = 100;
+    }
 
     @Override
     public void update(Engine engine, float deltaTime) {
-        timeBuffer += deltaTime;
-        if (timeBuffer >= 0.5f) {
-            scale += 0.1;
-            timeBuffer = 0;
-        }
+        button.update(engine, deltaTime);
     }
 
     @Override
     public void render(Engine engine, Renderer renderer) {
-        //check(() ->
-        renderer.drawText("ola, boa tarde", 50, 50, scale, Color.WHITE.getRGB());
-        //, 1, true);
+        button.render(engine, renderer);
     }
 
     public static void main(String[] args) {
         Engine e = new Engine(new Main());
-        e.setSize(400, 400);
+        e.setSize(800, 400);
         e.start();
     }
 }

@@ -1,5 +1,6 @@
 package com.engine.gfx;
 
+@Deprecated
 public class Font {
 
     private Image fontImage;

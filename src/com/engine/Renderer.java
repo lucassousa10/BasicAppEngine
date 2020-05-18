@@ -3,10 +3,12 @@ package com.engine;
 import com.engine.gfx.Font;
 import com.engine.gfx.RawMSFont;
 import com.engine.gfx.Image;
+import com.engine.gfx.SvgPathParsing;
 
 import java.awt.*;
 import java.awt.geom.Path2D;
 import java.awt.image.DataBufferInt;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 @SuppressWarnings("DuplicatedCode")
@@ -94,25 +96,6 @@ public class Renderer {
             RawMSFont.renderChar(c, nextCharacterOffsetX + offX, offY, scale, color, this);
             nextCharacterOffsetX += RawMSFont.CHAR_WIDTH * scale;
         }
-    }
-
-    //todo
-    public void floodFillRect(int x, int y, int w, int h, int color){
-        int prevColor = getPixel(x, y);
-        drawRect(x, y, w, h, color);
-        ffRect(x + 1, y + 1, prevColor, color);
-    }
-
-    //todo
-    private void ffRect(int x, int y, int prevColor, int nextColor) {
-        if (getPixel(x, y) != prevColor || !setPixel(x, y, nextColor)) {
-            return;
-        }
-
-        ffRect(x + 1, y, prevColor, nextColor);
-        ffRect(x - 1, y, prevColor, nextColor);
-        ffRect(x, y + 1, prevColor, nextColor);
-        ffRect(x, y - 1, prevColor, nextColor);
     }
 
     /**
@@ -271,12 +254,29 @@ public class Renderer {
         }
     }
 
-    public void drawPath(Path2D.Double path){
-
+    public void drawAbsolutePath(int offX, int offY, int color, ArrayList<SvgPathParsing.Operation> aboslutes) {
+        Point lastCursor = new Point();
+        for (SvgPathParsing.Operation o : aboslutes) {
+            switch (o.command) {
+                case "M":
+                    lastCursor = new Point(Math.round(o.args.get(0)) + offX, Math.round(o.args.get(1)) + offY);
+                    break;
+                case "C":
+                    drawCubicCurve(20, color,
+                            new Point(Math.round(o.args.get(0)), Math.round(o.args.get(1))),
+                            new Point(Math.round(o.args.get(2)), Math.round(o.args.get(3))),
+                            new Point(Math.round(o.args.get(4)), Math.round(o.args.get(5)))
+                    );
+                    break;
+                case "Z":
+                    drawLine2(Math.round(o.args.get(0)), Math.round(o.args.get(1)), lastCursor.x, lastCursor.y, color);
+                    break;
+            }
+        }
     }
 
     //algorithm source: https://rosettacode.org/wiki/Bitmap/B%C3%A9zier_curves/Cubic#Kotlin
-    public void drawCubicCurve(int resolution, Point... args) {
+    public void drawCubicCurve(int resolution, int color, Point... args) {
         //create points references
         Point[] points = new Point[resolution + 1];
         for (int i = 0; i < points.length; i++) {
@@ -293,14 +293,14 @@ public class Renderer {
             double d = t * t * t;
             points[i].x = (int) ((a * args[0].x) + (b * args[1].x) + (c * args[2].x) + (d * args[3].x));
             points[i].y = (int) ((a * args[0].y) + (b * args[1].y) + (c * args[2].y) + (d * args[3].y));
-            setPixel(points[i].x, points[i].y, Color.WHITE.getRGB());
+            setPixel(points[i].x, points[i].y, color);
         }
 
         //draw segments between each plotted points
         for (int i = 0; i < points.length - 1; i++) {
             Point a = points[i];
             Point b = points[i + 1];
-            drawLine2(a.x, a.y, b.x, b.y, Color.WHITE.getRGB());
+            drawLine2(a.x, a.y, b.x, b.y, color);
         }
     }
 
