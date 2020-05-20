@@ -6,6 +6,7 @@ import java.awt.Point;
 
 public class SvgPathParsing {
 
+    @Deprecated
     public static ArrayList<Operation> toAbsolutesOperations(String relativeD) {
         ArrayList<Operation> absolutes = new ArrayList<>();
 
@@ -103,6 +104,45 @@ public class SvgPathParsing {
                     "command='" + command + '\'' +
                     ", args=" + args +
                     '}';
+        }
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Operation> operations;
+        String d = "m 10 20 c 10 20 30 40 50 60 m 30 40 c 80 90 100 120 130 140 z";
+        operations = SvgPathParsing.getOperations(d);
+        System.out.println(SvgPathParsing.toAbsolutesOperations(d));
+
+        float cursorX = 0, cursorY = 0;
+        float currX = 0, currY = 0;
+        boolean first = true;
+        ArrayList<Float> aux = new ArrayList<>();
+        for (Operation o : operations) {
+            switch (o.command) {
+                case "m":
+                    if (!first) {
+                        System.out.println("drawLine2(" + currX + ", " + currY + ", " + cursorX + ", " + cursorY + ");");
+                    }
+
+                    cursorX += o.args.get(0);
+                    cursorY += o.args.get(1);
+                    first = false;
+                    break;
+                case "c":
+                    aux.clear();
+                    for (int i = 0; i < o.args.size(); i += 2) {
+                        currX = o.args.get(i) + cursorX;
+                        currY = o.args.get(i + 1) + cursorY;
+                        aux.add(currX);
+                        aux.add(currY);
+                    }
+
+                    System.out.println("drawCubicCurve(" + cursorX + ", " + cursorY + ", " + aux.get(0) + ", " + aux.get(1) + ", " + aux.get(2) + ", " + aux.get(3) + ", " + aux.get(4) + ", " + aux.get(5) + ");");
+                    break;
+                case "z":
+                    System.out.println("drawLine2(" + currX + ", " + currY + ", " + cursorX + ", " + cursorY + ");");
+                    break;
+            }
         }
     }
 }

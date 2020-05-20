@@ -40,7 +40,6 @@ public class RawMSFont {
     public static final int CHAR_HEIGHT = 6;
 
     public static final String ZERO =
-            /******/
             "   xxxxxxx   " +
                     "  xx     xx  " +
                     "  xx     xx  " +
@@ -49,7 +48,6 @@ public class RawMSFont {
                     "   xxxxxxx   ";
 
     public static final String ONE =
-            /******/
             "      xx     " +
                     "    xxxx     " +
                     "  xx  xx     " +
@@ -58,7 +56,6 @@ public class RawMSFont {
                     "  xxxxxxxxx  ";
 
     public static final String TWO =
-            /******/
             "  xxxxxxxxx  " +
                     "         xx  " +
                     "         xx  " +
@@ -67,7 +64,6 @@ public class RawMSFont {
                     "  xxxxxxxxx  ";
 
     public static final String THREE =
-            /******/
             "  xxxxxxxxx  " +
                     "         xx  " +
                     "     xxxxxx  " +
@@ -76,7 +72,6 @@ public class RawMSFont {
                     "  xxxxxxxxx  ";
 
     public static final String FOUR =
-            /******/
             "  xx     xx  " +
                     "  xx     xx  " +
                     "  xx     xx  " +
@@ -85,7 +80,6 @@ public class RawMSFont {
                     "         xx  ";
 
     public static final String FIVE =
-            /******/
             "  xxxxxxxxx  " +
                     "  xx         " +
                     "  xxxxxxxxx  " +
@@ -94,7 +88,6 @@ public class RawMSFont {
                     "  xxxxxxxxx  ";
 
     public static final String SIX =
-            /******/
             "    xxxxxx   " +
                     "  xx         " +
                     "  xx         " +
@@ -103,7 +96,6 @@ public class RawMSFont {
                     "   xxxxxxx   ";
 
     public static final String SEVEN =
-            /******/
             "  xxxxxxxxx  " +
                     "         xx  " +
                     "         xx  " +
@@ -112,7 +104,6 @@ public class RawMSFont {
                     "         xx  ";
 
     public static final String EIGHT =
-            /******/
             "   xxxxxxx   " +
                     "  xx     xx  " +
                     "  xxxxxxxxx  " +
@@ -121,7 +112,6 @@ public class RawMSFont {
                     "   xxxxxxx   ";
 
     public static final String NINE =
-            /******/
             "  xxxxxxxxx  " +
                     "  xx     xx  " +
                     "  xxxxxxxxx  " +
@@ -130,7 +120,6 @@ public class RawMSFont {
                     "         xx  ";
 
     public static final String A =
-            /******/
             "     xxx     " +
                     "   xx   xx   " +
                     " xx       xx " +
@@ -139,7 +128,6 @@ public class RawMSFont {
                     " xx       xx ";
 
     public static final String B =
-            /******/
             " xxxxxxxx    " +
                     " xx     xx   " +
                     " xxxxxxxxx   " +
@@ -148,7 +136,7 @@ public class RawMSFont {
                     "  xxxxxxxx   ";
 
     public static final String C =
-            /******/
+
             "  xxxxxxxx   " +
                     " xx      xx  " +
                     " x           " +
@@ -157,7 +145,7 @@ public class RawMSFont {
                     "  xxxxxxxx   ";
 
     public static final String D =
-            /******/
+
             " xxxxxxxx    " +
                     " xx      xx  " +
                     " xx       xx " +
@@ -165,17 +153,15 @@ public class RawMSFont {
                     " xx      xx  " +
                     " xxxxxxxx    ";
 
-    public static final String E =
-            /******/
-            " xxxxxxxxxxx " +
-                    " xx          " +
-                    " xxxxxxx     " +
-                    " xx          " +
-                    " xx          " +
-                    " xxxxxxxxxxx ";
+    public static final String E = " xxxxxxxxxxx " +
+            " xx          " +
+            " xxxxxxx     " +
+            " xx          " +
+            " xx          " +
+            " xxxxxxxxxxx ";
 
     public static final String F =
-            /******/
+
             " xxxxxxxxxxx " +
                     " xx          " +
                     " xxxxxxx     " +
@@ -185,7 +171,7 @@ public class RawMSFont {
 
     //TODO: ficou feio
     public static final String G =
-            /******/
+
             "  xxxxxxxx   " +
                     " xx      xxx " +
                     " xx          " +
@@ -194,7 +180,7 @@ public class RawMSFont {
                     "   xxxxxxx   ";
 
     public static final String H =
-            /******/
+
             " xx       xx " +
                     " xx       xx " +
                     " xxxxxxxxxxx " +
@@ -203,7 +189,7 @@ public class RawMSFont {
                     " xx       xx ";
 
     public static final String I =
-            /******/
+
             " xxxxxxxxxxx " +
                     "     xx      " +
                     "     xx      " +
@@ -212,7 +198,7 @@ public class RawMSFont {
                     " xxxxxxxxxxx ";
 
     public static final String J =
-            /******/
+
             " xxxxxxxxxxx " +
                     "       xx    " +
                     "       xx    " +
@@ -221,7 +207,7 @@ public class RawMSFont {
                     "  xxxxxxx    ";
 
     public static final String K =
-            /******/
+
             " xx     xx   " +
                     " xx   xx     " +
                     " xxxxxx      " +
@@ -230,7 +216,7 @@ public class RawMSFont {
                     " xx       xx ";
 
     public static final String L =
-            /******/
+
             " xx          " +
                     " xx          " +
                     " xx          " +
@@ -239,7 +225,7 @@ public class RawMSFont {
                     " xxxxxxxxxxx ";
 
     public static final String M =
-            /******/
+
             " xx       xx " +
                     " xxx     xxx " +
                     " xx x   x xx " +
@@ -248,7 +234,7 @@ public class RawMSFont {
                     " xx       xx ";
 
     public static final String N =
-            /******/
+
             " xxxx     xx " +
                     " xx xx    xx " +
                     " xx  xx   xx " +
@@ -257,7 +243,7 @@ public class RawMSFont {
                     " xx     xxxx ";
 
     public static final String O =
-            /******/
+
             "    xxxxx    " +
                     "  xx     xx  " +
                     " xx       xx " +
@@ -266,7 +252,7 @@ public class RawMSFont {
                     "    xxxxx    ";
 
     public static final String P =
-            /******/
+
             " xxxxxxxxx   " +
                     " xx       xx " +
                     " xx       xx " +
@@ -275,7 +261,7 @@ public class RawMSFont {
                     " xx          ";
 
     public static final String Q =
-            /******/
+
             "    xxxxx    " +
                     "  xx     xx  " +
                     " xx       xx " +
@@ -284,7 +270,7 @@ public class RawMSFont {
                     "    xxxxx  x ";
 
     public static final String R =
-            /******/
+
             " xxxxxxxxx   " +
                     " xx       xx " +
                     " xx       xx " +
@@ -293,7 +279,7 @@ public class RawMSFont {
                     " xx       xx ";
 
     public static final String S =
-            /******/
+
             "  xxxxxxx    " +
                     " x           " +
                     "  xxxxxx     " +
@@ -302,7 +288,7 @@ public class RawMSFont {
                     " xxxxxxxxx   ";
 
     public static final String T =
-            /******/
+
             " xxxxxxxxxxx " +
                     "     xxx     " +
                     "     xxx     " +
@@ -311,7 +297,7 @@ public class RawMSFont {
                     "     xxx     ";
 
     public static final String U =
-            /******/
+
             " xx       xx " +
                     " xx       xx " +
                     " xx       xx " +
@@ -320,7 +306,7 @@ public class RawMSFont {
                     "   xxxxxxx   ";
 
     public static final String V =
-            /******/
+
             " xx       xx " +
                     "  xx     xx  " +
                     "   xx   xx   " +
@@ -329,7 +315,7 @@ public class RawMSFont {
                     "      x      ";
 
     public static final String W =
-            /******/
+
             " xx       xx " +
                     " xx       xx " +
                     " xx       xx " +
@@ -338,7 +324,7 @@ public class RawMSFont {
                     "   xx   xx   ";
 
     public static final String X =
-            /******/
+
             "  x       x  " +
                     "   xx   xx   " +
                     "     xxx     " +
@@ -347,7 +333,7 @@ public class RawMSFont {
                     " x         x ";
 
     public static final String Y =
-            /******/
+
             " xx       xx " +
                     "  xx     xx  " +
                     "   xx   xx   " +
@@ -356,7 +342,7 @@ public class RawMSFont {
                     "     xxx     ";
 
     public static final String Z =
-            /******/
+
             "   xxxxxxxxx " +
                     "        xxx  " +
                     "      xx     " +
@@ -365,7 +351,7 @@ public class RawMSFont {
                     " xxxxxxxxxxx ";
 
     public static final String SPACE =
-            /******/
+
             "             " +
                     "             " +
                     "             " +
@@ -374,7 +360,7 @@ public class RawMSFont {
                     "             ";
 
     public static final String EXCLAMATION_MARK =
-            /******/
+
             "      xx     " +
                     "      xx     " +
                     "      xx     " +
@@ -383,8 +369,8 @@ public class RawMSFont {
                     "      xx     ";
 
     public static final String HIFEN =
-            /******/
-                    "             " +
+
+            "             " +
                     "             " +
                     "   xxxxxxxx  " +
                     "   xxxxxxxx  " +
@@ -392,7 +378,7 @@ public class RawMSFont {
                     "             ";
 
     public static final String DOT =
-            /******/
+
             "             " +
                     "             " +
                     "             " +
@@ -402,7 +388,7 @@ public class RawMSFont {
 
 
     public static final String COMMA =
-            /******/
+
             "             " +
                     "             " +
                     "             " +
@@ -411,7 +397,7 @@ public class RawMSFont {
                     " xx          ";
 
     public static final String CLOSE_PARENTHESIS =
-            /******/"       xx    " +
+            "       xx    " +
                     "         xx  " +
                     "          xx " +
                     "          xx " +
@@ -419,7 +405,7 @@ public class RawMSFont {
                     "       xx    ";
 
     public static final String OPEN_PARENTHESIS =
-            /******/"    xx       " +
+            "    xx       " +
                     "  xx         " +
                     " xx          " +
                     " xx          " +
@@ -427,7 +413,7 @@ public class RawMSFont {
                     "    xx       ";
 
     public static final String COLON =
-            /******/"             " +
+            "             " +
                     "  XX         " +
                     "  xx         " +
                     "             " +
@@ -435,8 +421,8 @@ public class RawMSFont {
                     "  xx         ";
 
     public static final String SEMICOLON =
-                    /******/
-                    "             " +
+
+            "             " +
                     "      xx     " +
                     "      xx     " +
                     "             " +
@@ -444,7 +430,7 @@ public class RawMSFont {
                     "    xx       ";
 
     public static final String NULL =
-            /******/
+
             "xxx      xxxx" +
                     "xx xxxxxx xxx" +
                     "xxxxxxxxx xxx" +
@@ -456,7 +442,7 @@ public class RawMSFont {
      * Create max possible character,
      * but only designs above will work.
      * If user call one that is not
-     * defined, than NULL is choose.
+     * defined, than {@code NULL} is choose.
      * <p>
      * Note: must be know that models
      * are used only to mark if a renderer
@@ -521,7 +507,7 @@ public class RawMSFont {
     /**
      * This render only ONE char onto screen.
      * <p>
-     * This takes a my custom renderer to "plot" rectangles
+     * This takes my custom renderer to "plot" rectangles
      * at current coordinates offset and, for this reason,
      * any kind of renderer that offer a "fillRect(x, y, w, h, color)"
      * method can be used.

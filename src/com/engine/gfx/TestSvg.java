@@ -12,7 +12,15 @@ public class TestSvg extends AbstractApplication {
     ArrayList<SvgPathParsing.Operation> operations;
 
     public TestSvg() {
-        String d = "m 1 2 c 1 2 3 4 5 6 z";
+        /*
+        M 10 20 C 20 40 40 60 60 80 M 90 120 C 170 210 190 240 220 260 Z
+         */
+        String d = "" +
+                "m 10 20 " +
+                "c 10 20 30 40 50 60 " +
+                //"m 30 40 " +
+                //"c 80 90 100 120 130 140 " +
+                "z";
         operations = SvgPathParsing.toAbsolutesOperations(d);
     }
 
@@ -29,6 +37,7 @@ public class TestSvg extends AbstractApplication {
     public static void main(String[] args) {
         Engine e = new Engine(new TestSvg());
         e.setSize(600, 600);
+        //e.setScale(1.5f);
         e.start();
     }
 }

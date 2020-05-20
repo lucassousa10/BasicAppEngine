@@ -38,8 +38,8 @@ public class Renderer {
     /**
      * Defines the color of the pixel in the coordinates {@code x} and {@code y} of the the application screen with the color of {@code value}.
      *
-     * @param x x coordinate of the pixel to set.
-     * @param y y coordinate of the pixel to set.
+     * @param x     x coordinate of the pixel to set.
+     * @param y     y coordinate of the pixel to set.
      * @param value color of the desired pixel.
      */
     public boolean setPixel(int x, int y, int value) {
@@ -62,16 +62,15 @@ public class Renderer {
 
     /**
      * Draws the specified text starting in {@code x} and {@code y} coordinates. The color of the text is set using the {@code color} param.
-     *
+     * <p>
      * Also, this method requires a font object (through the {@code font} param) to draw pixels properly.
      *
-     * @see com.engine.gfx.Font
-     *
-     * @param text the text to be drawn, in a String object
-     * @param x x coordinate to start drawing the text
-     * @param y y coordinate to start drawing the text
+     * @param text  the text to be drawn, in a String object
+     * @param x     x coordinate to start drawing the text
+     * @param y     y coordinate to start drawing the text
      * @param color the color of the text
-     * @param font the font the text should have.
+     * @param font  the font the text should have.
+     * @see com.engine.gfx.Font
      */
     public void drawText(String text, int x, int y, int color, Font font) {
         int offset = 0;
@@ -101,11 +100,11 @@ public class Renderer {
     /**
      * Draws (not filling, only bordering) a rectangle polygon shape using the respective params.
      *
-     * @param x x coordinate to start drawing the rectangle
-     * @param y y coordinate to start drawing the rectangle
-     * @param width width of the rectangle
+     * @param x      x coordinate to start drawing the rectangle
+     * @param y      y coordinate to start drawing the rectangle
+     * @param width  width of the rectangle
      * @param height height of the rectangle
-     * @param color color of edges/border of the rectangle
+     * @param color  color of edges/border of the rectangle
      */
     public void drawRect(int x, int y, int width, int height, int color) {
         if (x < -width) return;
@@ -254,29 +253,40 @@ public class Renderer {
         }
     }
 
-    public void drawAbsolutePath(int offX, int offY, int color, ArrayList<SvgPathParsing.Operation> aboslutes) {
-        Point lastCursor = new Point();
-        for (SvgPathParsing.Operation o : aboslutes) {
-            switch (o.command) {
-                case "M":
-                    lastCursor = new Point(Math.round(o.args.get(0)) + offX, Math.round(o.args.get(1)) + offY);
-                    break;
-                case "C":
-                    drawCubicCurve(20, color,
-                            new Point(Math.round(o.args.get(0)), Math.round(o.args.get(1))),
-                            new Point(Math.round(o.args.get(2)), Math.round(o.args.get(3))),
-                            new Point(Math.round(o.args.get(4)), Math.round(o.args.get(5)))
-                    );
-                    break;
-                case "Z":
-                    drawLine2(Math.round(o.args.get(0)), Math.round(o.args.get(1)), lastCursor.x, lastCursor.y, color);
-                    break;
+    @Deprecated
+    public void drawAbsolutePath(int offX, int offY, int color, ArrayList<SvgPathParsing.Operation> operations) {
+        int lastCursorIndex = -1;
+        int lastPointIndex = -1;
+
+        for (int i = 0; i < operations.size(); i++) {
+            if (operations.get(i).command.equals("M")) {
+                lastCursorIndex = i;
+            } else if (operations.get(i).command.equals("C")) {
+                SvgPathParsing.Operation lastCursor = operations.get(lastCursorIndex);
+
+                drawCubicCurve(20, color,
+                        Math.round(lastCursor.args.get(0)), Math.round(lastCursor.args.get(1)),
+                        Math.round(operations.get(i).args.get(0)), Math.round(operations.get(i).args.get(1)),
+                        Math.round(operations.get(i).args.get(2)), Math.round(operations.get(i).args.get(3)),
+                        Math.round(operations.get(i).args.get(4)), Math.round(operations.get(i).args.get(5))
+                );
+
+                lastPointIndex = i;
+            } else if (operations.get(i).command.equals("Z")) {
+                SvgPathParsing.Operation lastCursor = operations.get(lastCursorIndex);
+                SvgPathParsing.Operation lastPoint = operations.get(lastPointIndex);
+                drawLine2(
+                        Math.round(lastPoint.args.get(lastPoint.args.size() - 2)), Math.round(lastPoint.args.get(lastPoint.args.size() - 2)),
+                        Math.round(lastCursor.args.get(0)), Math.round(lastCursor.args.get(1)),
+                        color
+                );
             }
         }
     }
 
     //algorithm source: https://rosettacode.org/wiki/Bitmap/B%C3%A9zier_curves/Cubic#Kotlin
-    public void drawCubicCurve(int resolution, int color, Point... args) {
+    //public void drawCubicCurve(int resolution, int color, Point... args) {
+    public void drawCubicCurve(int resolution, int color, float x0, float y0, float x1, float y1, float x2, float y2, float x3, float y3) {
         //create points references
         Point[] points = new Point[resolution + 1];
         for (int i = 0; i < points.length; i++) {
@@ -291,8 +301,8 @@ public class Renderer {
             double b = 3.0 * t * u * u;
             double c = 3.0 * t * t * u;
             double d = t * t * t;
-            points[i].x = (int) ((a * args[0].x) + (b * args[1].x) + (c * args[2].x) + (d * args[3].x));
-            points[i].y = (int) ((a * args[0].y) + (b * args[1].y) + (c * args[2].y) + (d * args[3].y));
+            points[i].x = (int) ((a * x0) + (b * x1) + (c * x2) + (d * x3));
+            points[i].y = (int) ((a * y0) + (b * y1) + (c * y2) + (d * y3));
             setPixel(points[i].x, points[i].y, color);
         }
 
@@ -304,7 +314,7 @@ public class Renderer {
         }
     }
 
-    public void drawQuadraticCurve(int resolution, Point... args) {
+    public void drawQuadraticCurve(int resolution, int color, Point... args) {
         //create points references
         Point[] points = new Point[resolution + 1];
         for (int i = 0; i < points.length; i++) {
@@ -320,14 +330,14 @@ public class Renderer {
             double c = t * t;
             points[i].x = (int) ((a * args[0].x) + (b * args[1].x) + (c * args[2].x));
             points[i].y = (int) ((a * args[0].y) + (b * args[1].y) + (c * args[2].y));
-            setPixel(points[i].x, points[i].y, Color.WHITE.getRGB());
+            setPixel(points[i].x, points[i].y, color);
         }
 
         //draw segments between each plotted points
         for (int i = 0; i < points.length - 1; i++) {
             Point a = points[i];
             Point b = points[i + 1];
-            drawLine2(a.x, a.y, b.x, b.y, Color.WHITE.getRGB());
+            drawLine2(a.x, a.y, b.x, b.y, color);
         }
     }
 
