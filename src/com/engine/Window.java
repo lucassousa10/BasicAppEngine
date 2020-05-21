@@ -50,6 +50,7 @@ public class Window {
         strategy.show();
     }
 
+    //source: https://stackoverflow.com/a/197060/4563960
     private BufferedImage toCompatibleImage(BufferedImage image) {
         // obtain the current system graphical settings
         GraphicsConfiguration gfxConfig = GraphicsEnvironment.

@@ -46,10 +46,7 @@ public class Engine implements Runnable {
             delta += (now - lastTime) / ns;
             lastTime = now;
 
-            while (delta >= 1) {
-                update();
-                delta--;
-            }
+            while (delta >= 1) { update(); delta--; }
 
             //render here
             renderGame();
