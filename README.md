@@ -14,3 +14,6 @@ Em termos de otmização, as estratégias giram em torno da redução de ações
 Se vê-se que uma operação irá se repetir avalia-se a possibilidade de guardar seu resultado na memória, em alguma estrutura que poderá ser acessada posteriormente para apenas prover os dados em questão. Operações que não têm a possilidade de terem seus resultados gravados em variáveis da memória em último caso podem ser repetidas, entretando é ideal que sempre seja buscada uma forma de substituir tais processos por outros mais adequados.
 
 Além disso, otimização requer que não exageremos no uso de recursos da máquina do usuário. Guardar dados de operações na memória desenfreadamente pode nos fazer consumir espaço de mais. Além do que irá exisgir mais processamento já que precisaremos obter tais valores da memória. 
+
+# Como experimentar?
+Como falei acima, este projeto é apenas para estudos, entretanto ele pode ser usado em contexto prático, ao menos para aplicações simples. Caso queira experimentar, pode acessar um .JAR pré-compilado neste próprio repositório que está no link: https://github.com/lucassousa10/BasicAppEngine/blob/master/out/artifacts/basic_app_engine_jar/BasicAppEngine.jar.
