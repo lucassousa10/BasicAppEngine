@@ -1,5 +1,6 @@
 package com.engine;
 
+import java.awt.*;
 import java.awt.event.*;
 
 public class Input implements KeyListener, MouseListener, MouseMotionListener, MouseWheelListener {
@@ -7,11 +8,12 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener, M
     public static final int NUM_KEYS = 256;
     public static final int NUM_BUTTONS = 5;
 
-    private Engine engine;
+    private final Engine engine;
 
     private static boolean[] keys, lastKeys, buttons, lastButtons;
     private boolean mouseMoving;
 
+    public static Point mousePoint;
     public static int mouseX = -1, mouseY = -1, lastMouseX = -1, lastMouseY = -1;
     public static int mouseScroll;
 
@@ -23,6 +25,8 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener, M
 
         buttons = new boolean[NUM_BUTTONS];
         lastButtons = new boolean[NUM_BUTTONS];
+
+        mousePoint = new Point(mouseX, mouseY);
 
         engine.getWindow().getCanvas().addKeyListener(this);
         engine.getWindow().getCanvas().addMouseListener(this);
@@ -171,6 +175,8 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener, M
     public void mouseDragged(MouseEvent e) {
         mouseX = (int) (e.getX() / engine.getScale());
         mouseY = (int) (e.getY() / engine.getScale());
+        mousePoint.x = mouseX;
+        mousePoint.y = mouseY;
         mouseMoving = true;
     }
 
@@ -178,6 +184,8 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener, M
     public void mouseMoved(MouseEvent e) {
         mouseX = (int) (e.getX() / engine.getScale());
         mouseY = (int) (e.getY() / engine.getScale());
+        mousePoint.x = mouseX;
+        mousePoint.y = mouseY;
         mouseMoving = true;
     }
 
@@ -196,5 +204,15 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener, M
 
     public int getMouseScroll() {
         return mouseScroll;
+    }
+
+    public static Point getMousePoint() {
+        return mousePoint;
+    }
+
+    public static void setMousePoint(Point mousePoint) {
+        Input.mousePoint = mousePoint;
+        Input.mouseX = mousePoint.x;
+        Input.mouseY = mousePoint.y;
     }
 }

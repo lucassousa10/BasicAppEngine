@@ -2,6 +2,8 @@ package com.engine.gfx;
 
 import com.engine.Renderer;
 
+import java.awt.*;
+
 /**
  * This is a very very very BASIC font class.
  * <p>
@@ -414,20 +416,20 @@ public class RawMSFont {
 
     public static final String COLON =
             "             " +
-                    "  XX         " +
-                    "  xx         " +
+                    "  XXx        " +
+                    "  xxx        " +
                     "             " +
-                    "  xx         " +
-                    "  xx         ";
+                    "  xxx        " +
+                    "  xxx        ";
 
     public static final String SEMICOLON =
 
             "             " +
-                    "      xx     " +
-                    "      xx     " +
+                    "      xxx    " +
+                    "      xxx    " +
                     "             " +
-                    "      xx     " +
-                    "    xx       ";
+                    "      xxx    " +
+                    "    xxx      ";
 
     public static final String NULL =
 
@@ -522,19 +524,16 @@ public class RawMSFont {
     public static void renderChar(char c, int offX, int offY, float scale, int color, Renderer renderer) {
         final char[] data = (MODELS[c] == null ? NULL : MODELS[c]).toCharArray();
         //avoids huge casting inside loop
-        final int roundScale = Math.round(scale);
+        final int s = Math.round(scale);
+
+        renderer.g2d.setColor(Color.getColor("" + color, Color.WHITE));
 
         //independent of scale, always will perform
         //(CHAR_WIDTH * CHAR_HEIGHT) iterations
         for (int y = 0; y < CHAR_HEIGHT; y++) {
             for (int x = 0; x < CHAR_WIDTH; x++) {
                 if (data[x + y * CHAR_WIDTH] != ' ') {
-                    renderer.fillRect(
-                            (x * roundScale) + offX,
-                            (y * roundScale) + offY,
-                            roundScale,
-                            roundScale,
-                            color);
+                    renderer.g2d.fillRect((x * s) + offX, (y * s) + offY, s, s);
                 }
             }
         }

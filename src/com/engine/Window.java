@@ -7,17 +7,17 @@ import java.awt.image.BufferedImage;
 
 public class Window {
 
-    private Engine engine;
+    private final Engine engine;
 
-    private JFrame frame;
-    private BufferedImage image;
-    private Canvas canvas;
-    private BufferStrategy strategy;
-    private Graphics g;
+    private final JFrame frame;
+    private final BufferedImage image;
+    private final Canvas canvas;
+    private final BufferStrategy strategy;
+    private final Graphics g;
 
     public Window(Engine engine) {
         this.engine = engine;
-        image = new BufferedImage(engine.getWidth(), engine.getHeight(), BufferedImage.TYPE_INT_RGB);
+        image = toCompatibleImage(new BufferedImage(engine.getWidth(), engine.getHeight(), BufferedImage.TYPE_INT_RGB));
 
         canvas = new Canvas();
         int canvasWidth = (int) (engine.getWidth() * engine.getScale());
@@ -48,6 +48,34 @@ public class Window {
     public void render() {
         g.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
         strategy.show();
+    }
+
+    private BufferedImage toCompatibleImage(BufferedImage image) {
+        // obtain the current system graphical settings
+        GraphicsConfiguration gfxConfig = GraphicsEnvironment.
+                getLocalGraphicsEnvironment().getDefaultScreenDevice().
+                getDefaultConfiguration();
+
+        /*
+         * if image is already compatible and optimized for current system
+         * settings, simply return it
+         */
+        if (image.getColorModel().equals(gfxConfig.getColorModel()))
+            return image;
+
+        // image is not optimized, so create a new image that is
+        BufferedImage newImage = gfxConfig.createCompatibleImage(
+                image.getWidth(), image.getHeight(), image.getTransparency());
+
+        // get the graphics context of the new image to draw the old image on
+        Graphics2D g2d = newImage.createGraphics();
+
+        // actually draw the image and dispose of context no longer needed
+        g2d.drawImage(image, 0, 0, null);
+        g2d.dispose();
+
+        // return the new optimized image
+        return newImage;
     }
 
     public BufferedImage getImage() {

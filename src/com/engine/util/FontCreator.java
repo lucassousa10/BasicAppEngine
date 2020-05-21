@@ -25,14 +25,12 @@ public class FontCreator extends JFrame {
      * Launch the application.
      */
     public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    FontCreator frame = new FontCreator();
-                    frame.setVisible(true);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+        EventQueue.invokeLater(() -> {
+            try {
+                FontCreator frame = new FontCreator();
+                frame.setVisible(true);
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
         });
     }
@@ -128,7 +126,7 @@ public class FontCreator extends JFrame {
 
                 FontRenderContext frc = gr.getFontRenderContext();
 
-                StringBuffer buffer = new StringBuffer(256);
+                StringBuilder buffer = new StringBuilder(256);
                 for (int c = 0; c < 256; c++) {
                     buffer.append((char) c);
                 }

@@ -1,6 +1,5 @@
 package com.engine;
 
-@SuppressWarnings("FieldCanBeLocal")
 public class Engine implements Runnable {
 
     public static final int RATE = 60;
@@ -11,17 +10,16 @@ public class Engine implements Runnable {
     private float scale;
 
     int frames = 0, updates = 0;
+    private boolean isRunning;
 
     private Window window;
     private Renderer renderer;
-    private AbstractApplication game;
     private Input input;
+    private final AbstractApplication application;
 
-    private boolean isRunning;
-
-    public Engine(AbstractApplication game) {
-        this.game = game;
-        this.setScale(1f);
+    public Engine(AbstractApplication application) {
+        this.application = application;
+        setScale(1f);
     }
 
     public void start() {
@@ -29,8 +27,8 @@ public class Engine implements Runnable {
         renderer = new Renderer(this);
         input = new Input(this);
 
-        Thread thread = new Thread(this);
-        thread.run(); //should call @{code start()} instead?
+        Thread t = new Thread(this);
+        t.start();
     }
 
     @Override
@@ -58,7 +56,7 @@ public class Engine implements Runnable {
 
             //helper to measure rates per second elapsed
             if (System.currentTimeMillis() - auxTimer >= 1000) {
-                window.getFrame().setTitle(getFrames() + " FPS | " + getUpdates() + " UPS");
+                window.getFrame().setTitle(frames + " FPS | " + updates + " UPS");
                 frames = 0;
                 updates = 0;
                 auxTimer = System.currentTimeMillis();
@@ -66,16 +64,15 @@ public class Engine implements Runnable {
         }
     }
 
-    //updates managers
-    private void update() {
-        game.updateWithInternalDelta(this);
+    public void update() {
+        application.updateWithInternalDelta(this);
         input.update();
         updates++;
     }
 
-    private void renderGame() {
+    public void renderGame() {
         renderer.clear();
-        game.render(this, renderer);
+        application.render(this, renderer);
         window.render();
         frames++;
     }
@@ -83,14 +80,6 @@ public class Engine implements Runnable {
     public void setSize(int width, int height) {
         setWidth(width);
         setHeight(height);
-    }
-
-    public Window getWindow() {
-        return window;
-    }
-
-    public Input getInput() {
-        return input;
     }
 
     public int getWidth() {
@@ -117,11 +106,7 @@ public class Engine implements Runnable {
         this.scale = scale;
     }
 
-    public int getFrames() {
-        return frames;
-    }
-
-    public int getUpdates() {
-        return updates;
+    public Window getWindow() {
+        return window;
     }
 }
