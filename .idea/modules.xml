@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BasicAppEngine.iml" filepath="$PROJECT_DIR$/BasicAppEngine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/engine.iml" filepath="$PROJECT_DIR$/engine.iml" />
     </modules>
   </component>
 </project>
