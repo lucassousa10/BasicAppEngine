@@ -1,13 +1,10 @@
 package com.engine;
 
 import com.engine.gfx.Shape;
-import com.engine.gfx.SvgPathParsing;
 
 import java.awt.*;
-import java.awt.geom.Path2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Renderer {

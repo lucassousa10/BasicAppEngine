@@ -19,6 +19,7 @@ import java.util.ArrayList;
  * instance, who will do all the heavy work for us.
  *
  * @author Lucas Sousa
+ *
  * @see SvgPathParsing
  * @see java.awt.geom.AffineTransform
  */
