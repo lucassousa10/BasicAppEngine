@@ -13,7 +13,7 @@ public class SvgPathParsing {
 
         for (Operation o : getOperations(relativeD)) {
 
-            //todo: implement remaining commands
+            //todo: conversion of remaining commands
             switch (o.command) {
                 case "m":
                     mx += o.args.get(0);
