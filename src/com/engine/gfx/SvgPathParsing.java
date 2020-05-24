@@ -1,9 +1,44 @@
 package com.engine.gfx;
 
+import java.awt.geom.Path2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class SvgPathParsing {
+
+    public static Path2D operationsToPath2D(ArrayList<Operation> operations, int offX, int offY, float scale, boolean floatFormat) {
+        Path2D path2D = floatFormat ? new Path2D.Float() : new Path2D.Double();
+
+        for (SvgPathParsing.Operation o : operations) {
+            switch (o.command) {
+                case "M":
+                    path2D.moveTo(
+                            (o.args.get(0) + offX) * scale,
+                            (o.args.get(1) + offY) * scale);
+                    break;
+                case "C":
+                    path2D.curveTo(
+                            (o.args.get(0) + offX) * scale,
+                            (o.args.get(1) + offY) * scale,
+                            (o.args.get(2) + offX) * scale,
+                            (o.args.get(3) + offY) * scale,
+                            (o.args.get(4) + offX) * scale,
+                            (o.args.get(5) + offY) * scale);
+                    break;
+                case "Q":
+                    path2D.quadTo(
+                            (o.args.get(0) + offX) * scale,
+                            (o.args.get(1) + offY) * scale,
+                            (o.args.get(2) + offX) * scale,
+                            (o.args.get(3) + offY) * scale);
+                    break;
+                case "Z":
+                    path2D.closePath();
+            }
+        }
+
+        return path2D;
+    }
 
     public static ArrayList<Operation> toAbsolutesOperations(String relativeD) {
         ArrayList<Operation> absolutes = new ArrayList<>();

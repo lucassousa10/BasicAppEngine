@@ -1,5 +1,6 @@
 package com.engine;
 
+import com.engine.gfx.Shape;
 import com.engine.gfx.SvgPathParsing;
 
 import java.awt.*;
@@ -34,56 +35,14 @@ public class Renderer {
         Arrays.fill(pixelData, 0);
     }
 
-    public void drawSvgPathOperations(Path2D path, ArrayList<SvgPathParsing.Operation> operations,
-                                      int offX, int offY, float scale, Color color) {
-        if (path == null) path = new Path2D.Float();
-
-        if (!operations.isEmpty() && scale > 0) {
-            feedPath(path, operations, offX, offY, scale);
-            g2d.setColor(color);
-            g2d.draw(path);
-        }
+    public void drawShape(Shape shape, Color color) {
+        g2d.setColor(color);
+        g2d.draw(shape);
     }
 
-    public void fillSvgPathOperations(Path2D path, ArrayList<SvgPathParsing.Operation> operations,
-                                      int offX, int offY, float scale, Color color) {
-        if (path == null) path = new Path2D.Float();
-
-        if (!operations.isEmpty() && scale > 0) {
-            feedPath(path, operations, offX, offY, scale);
-            g2d.setColor(color);
-            g2d.fill(path);
-        }
-    }
-
-    private void feedPath(Path2D path, ArrayList<SvgPathParsing.Operation> operations, int offX, int offY, float scale) {
-        for (SvgPathParsing.Operation o : operations) {
-            switch (o.command) {
-                case "M":
-                    path.moveTo(
-                            (o.args.get(0) + offX) * scale,
-                            (o.args.get(1) + offY) * scale);
-                    break;
-                case "C":
-                    path.curveTo(
-                            (o.args.get(0) + offX) * scale,
-                            (o.args.get(1) + offY) * scale,
-                            (o.args.get(2) + offX) * scale,
-                            (o.args.get(3) + offY) * scale,
-                            (o.args.get(4) + offX) * scale,
-                            (o.args.get(5) + offY) * scale);
-                    break;
-                case "Q":
-                    path.quadTo(
-                            (o.args.get(0) + offX) * scale,
-                            (o.args.get(1) + offY) * scale,
-                            (o.args.get(2) + offX) * scale,
-                            (o.args.get(3) + offY) * scale);
-                    break;
-                case "Z":
-                    path.closePath();
-            }
-        }
+    public void fillShape(Shape shape, Color color) {
+        g2d.setColor(color);
+        g2d.fill(shape);
     }
 
     public boolean setPixel(int x, int y, int value) {
